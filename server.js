@@ -1,13 +1,16 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const PORT = 3000;
 
-app.use(express.static("public"));
+const PORT = process.env.PORT || 80;
 
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/index.html");
+app.get('/', (req, res) => {
+    res.send('Hello, Docker!');
+});
+
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
